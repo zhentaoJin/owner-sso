@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jzt.sso.mapper.RoleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jzt.sso.model.RoleEntity" id="roleMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="desc" column="desc"/>
+        <result property="creatBy" column="creat_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="orgId" column="org_id"/>
+        <result property="orgName" column="org_name"/>
+    </resultMap>
+
+
+    <select id="selectMenuIdByUserId" resultType="java.lang.Long">
+      select b.menu_id from user_role a left join role_menu b
+      on a.role_id=b.role_id
+      where a.user_id=#{userId}
+    </select>
+
+    <select id="getRoleName" resultType="java.lang.String">
+      select a.name from role a
+        <where>
+            a.org_id=#{orgId}
+            <if test="id !=0">
+                and a.id !=#{id}
+            </if>
+        </where>
+    </select>
+
+</mapper>

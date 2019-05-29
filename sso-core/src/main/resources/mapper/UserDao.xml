@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jzt.sso.mapper.UserDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jzt.sso.model.UserEntity" id="userMap">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="desc" column="desc"/>
+        <result property="roleName" column="role_code"/>
+        <result property="roleId" column="role_id"/>
+        <result property="status" column="status"/>
+        <result property="orgId" column="org_code"/>
+        <result property="orgName" column="org_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isAdmin" column="is_admin"/>
+    </resultMap>
+
+    <select id="selectByName" resultMap="userMap">
+        select a.* from user  a
+        where a.user_name = #{userName}
+    </select>
+
+
+    <select id="selectRoleUsers"  parameterType="java.lang.Long" resultMap="userMap">
+          SELECT a.*  FROM
+          user a
+        LEFT JOIN user_role b
+        ON a.id = b.`user_id`
+       WHERE b.`role_id` =#{roleId}
+    </select>
+
+
+    <select id="selectUserIds" parameterType="java.util.HashMap" resultMap="userMap">
+                    SELECT * FROM `user` t WHERE t.id NOT IN (SELECT
+              a.id
+            FROM
+              user  a
+              LEFT JOIN user_role b
+                ON a.id = b.`user_id`
+            WHERE b.role_id = #{roleId}
+              AND a.org_code = #{orgCode} ) AND t.`org_code`=#{orgCode}
+
+--         select (select id from user where user_role.user_id = user.id) id,
+--         (select user_name from user where user_role.user_id = user.id) user_name,
+--         role_id
+--         from user_role where role_id !=1
+
+    </select>
+
+</mapper>

@@ -1,0 +1,82 @@
+package
+
+    ${package.Controller};
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import ${package.Entity}.${entity};
+import ${package.ServiceImpl}.${table.serviceImplName};
+    #if(${superControllerClassPackage})
+    import ${superControllerClassPackage};
+    #end
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Collections;
+import java.util.List;
+/**
+ * <p>
+ * ${table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Controller @RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end")
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+private static final Logger logger=LoggerFactory.getLogger(${table.controllerName}.class);
+
+@Autowired private ${table.serviceImplName} service;
+
+@RequestMapping("/list") public String list(){
+    return"#if(${package.ModuleName})/${package.ModuleName}#end/list";
+    }
+
+@RequestMapping(value = "/list/json") @ResponseBody public List<${entity}> json(${entity} entity){
+    return service.selectList(new EntityWrapper<>(entity));
+    }
+
+@RequestMapping("/create") public String createForm(Model model){
+    model.addAttribute("action","create");
+    return"#if(${package.ModuleName})/${package.ModuleName}#end/form";
+    }
+
+@RequestMapping(value = "/create", method = RequestMethod.POST) @ResponseBody public String create(${entity} entity){
+    boolean isSuccess=service.insert(entity);
+    if(isSuccess){
+    return"success";
+    }
+    return"创建失败";
+    }
+
+@RequestMapping(value = "/edit/{id}") public String editForm(@PathVariable String id,Model model){
+    ${entity} entity=service.selectById(id);
+    model.addAttribute("entity",entity);
+    model.addAttribute("action","edit");
+    return"#if(${package.ModuleName})/${package.ModuleName}#end/form";
+    }
+
+@RequestMapping(value = "/edit", method = RequestMethod.POST) @ResponseBody public String edit(${entity} entity){
+    Boolean isSuccess=service.insertOrUpdate(entity);
+    if(isSuccess){
+    return"success";
+    }
+    return"修改失败";
+    }
+
+@RequestMapping(value = "/delete", method = RequestMethod.POST) @ResponseBody public String delete(@RequestBody Integer[]idList){
+    boolean isSuccess=service.deleteBatchIds(Collections.singletonList(idList));
+    if(isSuccess){
+    return"success";
+    }
+    return"删除失败";
+    }
+    }

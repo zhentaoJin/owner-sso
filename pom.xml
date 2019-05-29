@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jzt</groupId>
+    <artifactId>sso</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <modules>
+        <module>sso-base-dep</module>
+        <module>sso-code-generotar</module>
+        <module>sso-common</module>
+        <module>sso-core</module>
+        <module>sso-web</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <!-- swagger2:start -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+        <!-- swagger2:end -->
+    </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.3.12.RELEASE</spring.version>
+        <mysql.version>5.1.45</mysql.version>
+        <mybatis-plus.version>2.1.9</mybatis-plus.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <lombok.version>1.16.16</lombok.version>
+        <log4j.version>1.2.16</log4j.version>
+        <junit.version>4.12</junit.version>
+        <guava.version>18.0</guava.version>
+        <fastJson.version>1.1.43</fastJson.version>
+        <velocity.version>1.7</velocity.version>
+        <druid.version>1.0.16</druid.version>
+
+    </properties>
+
+ 
+
+</project>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jzt.sso.mapper.SystemLogDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jzt.sso.model.SystemLogEntity" id="systemLogMap">
+        <result property="id" column="id"/>
+        <result property="opPhone" column="op_phone"/>
+        <result property="opName" column="op_name"/>
+        <result property="opId" column="op_id"/>
+        <result property="recordDate" column="record_date"/>
+        <result property="opOrg" column="op_org"/>
+        <result property="ip" column="ip"/>
+        <result property="macIp" column="mac_ip"/>
+        <result property="opTime" column="op_time"/>
+        <result property="opResult" column="op_result"/>
+        <result property="opEntity" column="op_entity"/>
+        <result property="opAction" column="op_action"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

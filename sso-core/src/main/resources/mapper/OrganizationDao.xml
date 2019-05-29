@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jzt.sso.mapper.OrganizationDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.jzt.sso.model.OrganizationEntity" id="organizationMap">
+        <result property="id" column="id"/>
+        <result property="orgName" column="org_name"/>
+        <result property="concatName" column="concat_name"/>
+        <result property="concatPhone" column="concat_phone"/>
+        <result property="concatAddress" column="concat_address"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="getOrgNames" parameterType="java.lang.Long" resultType="java.lang.String">
+        select a.org_name as orgName from organization a
+        <where>
+            <if test="id !=0">
+                and a.id !=#{id}
+            </if>
+        </where>
+    </select>
+
+</mapper>
