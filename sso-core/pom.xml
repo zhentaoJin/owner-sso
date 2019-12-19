@@ -29,8 +29,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.cr</groupId>
-            <artifactId>ots-common</artifactId>
+            <groupId>com.jzt</groupId>
+            <artifactId>sso-common</artifactId>
             <version>${project.version}</version>
         </dependency>
 
